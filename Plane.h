@@ -1,17 +1,18 @@
-#pragma once
 #include <iostream>
 using namespace std;
-class Plane
-{
+
+class Plane {
 private:
-	string name;
-	bool status;
+    int arrivalTime;
+    int landingTime;
+    bool landed;
 
 public:
-	Plane();
-	Plane(string n, bool s);
-	void landing();
-	bool landed();
+    Plane() { arrivalTime =generateRandomNumber() ; }
+    int getArrivalTime() { return arrivalTime; }
+    int getLandingTime() { return landingTime; }
+    void setLandingTime(int t) { landingTime = t; }
+    float generateRandomNumber();
+    bool landed();
 
 };
-
