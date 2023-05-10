@@ -13,12 +13,16 @@ private:
     int Tmax;
     int Tlanding;
     float deltaT;
+    float interArrivalTime;
+    float Pa;
+    int QueueLimit;
 
 public:
-    Airport(int maxTime, int landingTime, float interArrivalTime);
+    Airport();
     void printLog(int time, int numArrivals, int numWaiting);
-    float averageWait(int waitTotal, int jobcount);
+    float averageWait();
     void exitLine(int t, int& waitTotal, int& jobcount);
     void service(int t, int Tr, int& waitTotal, int& jobcount);
     void arrival(int t);
+    void sortQueue();
 };

@@ -1,18 +1,40 @@
 #include <iostream>
-using namespace std;
+#include <time.h>
+#ifndef Plane_h
+#define Plane_h
 
+using namespace std;
+template <class T>
+T generateRandomNumber(int i, int j)
+{
+    return rand() % (j - i) + i;
+}
 class Plane {
 private:
     int arrivalTime;
     int landingTime;
-    bool landed;
+    bool v_landed;
+    int waittime;
+    static int created;
+    static int baseTime;
+
 
 public:
-    Plane() { arrivalTime =generateRandomNumber() ; }
-    int getArrivalTime() { return arrivalTime; }
-    int getLandingTime() { return landingTime; }
+    bool operator>(const Plane& other) const {
+        return this->arrivalTime > other.arrivalTime;
+    }
+    Plane();
+    int getArrivalTime();
+    int getLandingTime();
     void setLandingTime(int t) { landingTime = t; }
-    float generateRandomNumber();
+    void setArrivalTime();
+    void setlanded();
     bool landed();
+    void ArrivalTimeAdded();
+   
+
+   
 
 };
+
+#endif
