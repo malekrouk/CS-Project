@@ -1,10 +1,14 @@
 #include <iostream>
+#include "Plane.h"
 using namespace std;
+#ifndef Queue_h
+#define Queue_h 
 
 template <class T>
 struct Node
 {
-    T value;
+    Plane value;
+    
     Node<T>* back;
     Node<T>* next;
 };
@@ -16,6 +20,7 @@ private:
     Node<T>* first;
     Node<T>* last;
     int counter;
+    int index = 0;
 
 public:
     Queue()
@@ -137,7 +142,6 @@ public:
             cout << "Queue is Empty" << endl;
             return T();
         }
-        cout << first->value << endl;
         return first->value;
     }    
     T viewRear()
@@ -147,7 +151,6 @@ public:
             cout << "Queue is Empty" << endl;
             return T();
         }
-        cout << last->value << endl;
         return last->value;
     }   
     int length()
@@ -157,15 +160,22 @@ public:
     }   
     void print()
     {
+        if (isEmpty())
+        {
+            cout << "Queue is Empty" << endl;
+            return;
+        }
+
         Node<T>* temp;
         temp = first;
         cout << "THE QUEUE IS AS FOLLOWS:" << endl;
         while (temp != NULL)
         {
-            cout << temp->value << endl;
+            temp->value.PrintArrivalTime();
             temp = temp->next;
         }
     }
+
     bool isFull(int t)
     {
         if (counter == t)
@@ -173,41 +183,45 @@ public:
         return false;
     }    
     
-        void sort()
-        {
-            quickSort(first, last);
-        }
+    void sort()
+    {
+        quickSort(first, last);
+    }
 
-        Node<T>* partition(Node<T>*low, Node<T>*high)
-        {
-            T pivot = high->value;
-            Node<T>* i = low->back;
+    Node<T>* partition(Node<T>* low, Node<T>* high)
+    {
+        int pivot;
+            pivot = high->value.getArrivalTime2();
+        Node<T>* i = low->back;
 
-            for (Node<T>* j = low; j != high; j = j->next)
+        for (Node<T>* j = low; j != high; j = j->next)
+        {
+            if (j->value.getArrivalTime2() <= pivot)
             {
-                if (j->value <= pivot)
-                {
-                    i = (i == NULL) ? low : i->next;
-                    swap(i->value, j->value);
-                }
-            }
-
-            i = (i == NULL) ? low : i->next;
-            swap(i->value, high->value);
-            return i;
-        }
-
-        void quickSort(Node<T>*low, Node<T>*high)
-        {
-            if (high != NULL && low != high && low != high->next)
-            {
-                Node<T>* p = partition(low, high);
-                quickSort(low, p->back);
-                quickSort(p->next, high);
+                i = (i == NULL) ? low : i->next;
+                swap(i->value, j->value);
             }
         }
+
+        i = (i == NULL) ? low : i->next;
+        swap(i->value, high->value);
+        return i;
+    }
+
+    void quickSort(Node<T>* low, Node<T>* high)
+    {
+        if (high != NULL && low != high && low != high->next)
+        {
+            Node<T>* p = partition(low, high);
+            quickSort(low, p->back);
+            quickSort(p->next, high);
+        }
+    }
+
+
 
      
     ~Queue() {} //destructor
 };
 
+#endif

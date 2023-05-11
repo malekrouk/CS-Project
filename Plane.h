@@ -4,19 +4,17 @@
 #define Plane_h
 
 using namespace std;
-template <class T>
-T generateRandomNumber(int i, int j)
-{
-    return rand() % (j - i) + i;
-}
+
 class Plane {
 private:
     int arrivalTime;
     int landingTime;
     bool v_landed;
     int waittime;
+    int servicetime;
     static int created;
     static int baseTime;
+    int arrivalTime2;
 
 
 public:
@@ -24,14 +22,23 @@ public:
         return this->arrivalTime > other.arrivalTime;
     }
     Plane();
+    
+
+    
+    void PrintArrivalTime();
     int getArrivalTime();
+    int getArrivalTime2();
     int getLandingTime();
-    void setLandingTime(int t) { landingTime = t; }
+    void setLandingTime(int t);
     void setArrivalTime();
-    void setlanded();
+    void setlanded(bool);
     bool landed();
     void ArrivalTimeAdded();
-   
+    int getBaseTime();
+    int getWaitTime();
+    int getServiceTime();
+    void setServiceTime();
+    void setWaitTime();
 
    
 

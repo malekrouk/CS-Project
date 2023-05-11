@@ -2,27 +2,32 @@
 #include "Plane.h"
 #include "Queue.h"
 using namespace std;
-
+#ifndef Airport_h
+#define Airport_h
 class Airport {
 private:
-    Queue<Plane> landingQueue;
-    bool runwayFree;
-    int totalTime;
-    int numPlanesLanded;
-    int totalWaitTime;
-    int Tmax;
-    int Tlanding;
-    float deltaT;
+    Queue<Plane> AirQueue;
+    Queue<Plane> LandingQueue;
+    int numPlanesLanded =0;
+    static int totalWaitTime;
     float interArrivalTime;
-    float Pa;
-    int QueueLimit;
+    int AirQueueLimit = rand() % (30 - 10) + 10;
+    int LandingQueueLimit = 1;
+    int time;
+
+
+
 
 public:
     Airport();
-    void printLog(int time, int numArrivals, int numWaiting);
+    void printLog();
     float averageWait();
-    void exitLine(int t, int& waitTotal, int& jobcount);
-    void service(int t, int Tr, int& waitTotal, int& jobcount);
-    void arrival(int t);
-    void sortQueue();
+    void exitAirQueue();
+    void exitLandingQueue();
+    void service();
+    int getAirQueueLimit();
+    void PopulateAirQueue();
+    Queue<Plane> getAirQueue();
+    void clock();
 };
+#endif
