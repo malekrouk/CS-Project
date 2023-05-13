@@ -9,7 +9,6 @@ public:
     Queue<Plane> AirQueue;
     int numPlanesLanded =0;
      int totalWaitTime =0;
-    float interArrivalTime;
     int AirQueueLimit = rand() % (15 - 10) + 10;
      int time=0;
      int basetime=0;
