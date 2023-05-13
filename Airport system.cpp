@@ -26,11 +26,13 @@ int main()
     
     
     // Add planes to the queue
-
     
     x.getAirQueue().sort();
     // Sort the queue by arrival time
    
+    x.getAirQueue().dealWithClashes();
+
+    x.getAirQueue().sort();
 
     // Print the sorted queue
     x.getAirQueue().print();

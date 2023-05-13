@@ -39,6 +39,8 @@ public:
     int getServiceTime();
     void setServiceTime();
     void setWaitTime();
+    void setArrivalTime2(int x);
+    void setArrivetime(int y);
 
    
 

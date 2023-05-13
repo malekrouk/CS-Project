@@ -1,5 +1,5 @@
 #include "Plane.h"
-
+#include <string>
 int Plane::created = 0;
 int Plane::baseTime = 0;
 
@@ -14,19 +14,17 @@ Plane::Plane() {
     landingTime = -1;
     created++;
 }
-
 void Plane::PrintArrivalTime() {
     cout << "The arrival time of the plane is ";
-    if (arrivalTime / 60 < 10) {
-        cout << "0";
-    }
-    cout << arrivalTime / 60 << ":";
-    if (arrivalTime % 60 < 10) {
-        cout << "0";
-    }
-    cout << arrivalTime % 60 << endl;
-    
+    int x = arrivalTime2;
+    while (x > 1440) x -= 1440;
+    string s = to_string(x / 60);
+    while (s.size() < 2) s = "0" + s;
+    string t = to_string(x % 60);
+    while (t.size() < 2) t = "0" + t;
+    cout << s + ":" + t << '\n';
 }
+
 
 void Plane::setlanded(bool x)
 {
@@ -68,6 +66,7 @@ void Plane::ArrivalTimeAdded() {
     arrivalTime = total;
 }
 
+
 int Plane::getBaseTime()
 {
     return baseTime;
@@ -104,4 +103,13 @@ void Plane::setLandingTime(int x)
 bool Plane::landed()
 {
     return v_landed;
+}
+void Plane :: setArrivalTime2(int x)
+{
+    arrivalTime2 = x;
+}
+
+void Plane :: setArrivetime(int y)
+{
+    arrivalTime = y;
 }

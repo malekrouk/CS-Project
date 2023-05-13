@@ -30,11 +30,11 @@ public:
         counter = 0;
     }
     bool isEmpty()
-{
-	if (first == NULL)
-		return true;
-	return false;
-}
+    {
+        if (first == NULL)
+            return true;
+        return false;
+    }
     void insertRear(T n)
     {
         if (first == NULL)
@@ -76,7 +76,7 @@ public:
             first = temp;
         }
         counter++;
-    }  
+    }
     void insertAfter(T v, Node<T>* curr)
     {
         Node<T>* temp = new Node<T>;
@@ -87,7 +87,7 @@ public:
         if (temp->next != NULL)
             temp->next->back = temp;
         counter++;
-    }    
+    }
     void removeRear()
     {
         if (last == NULL) // Queue is empty
@@ -111,7 +111,7 @@ public:
         last = temp;
         counter--;
     }
-   
+
     void removeFront()
     {
         if (last == NULL) // Queue is empty
@@ -143,7 +143,7 @@ public:
             return T();
         }
         return first->value;
-    }    
+    }
     T viewRear()
     {
         if (isEmpty())
@@ -152,12 +152,12 @@ public:
             return T();
         }
         return last->value;
-    }   
+    }
     int length()
     {
         cout << "Length of the Queue is: " << counter << endl;
         return counter;
-    }   
+    }
     void print()
     {
         if (isEmpty())
@@ -181,8 +181,8 @@ public:
         if (counter == t)
             return true;
         return false;
-    }    
-    
+    }
+
     void sort()
     {
         quickSort(first, last);
@@ -191,7 +191,7 @@ public:
     Node<T>* partition(Node<T>* low, Node<T>* high)
     {
         int pivot;
-            pivot = high->value.getArrivalTime2();
+        pivot = high->value.getArrivalTime2();
         Node<T>* i = low->back;
 
         for (Node<T>* j = low; j != high; j = j->next)
@@ -217,6 +217,36 @@ public:
             quickSort(p->next, high);
         }
     }
+
+    void dealWithClashes()
+    {
+
+        Node<T>* u = first;
+        while (u) {
+            cout << u->value.getArrivalTime2() << ' ';
+            u = u->next;
+        }
+        cout << '\n';
+
+        u = first;
+        int bef = u->value.getArrivalTime2();
+        if (u)
+            u = u->next;
+        while (u) {
+            if (u->value.getArrivalTime2() - bef <= 10) u->value.setArrivalTime2(bef + 11);
+            bef = u->value.getArrivalTime2();
+            u = u->next;
+        }
+
+        u = first;
+        while (u) {
+            cout << u->value.getArrivalTime2() << ' ';
+            u = u->next;
+        }
+        cout << '\n';
+    }
+
+
 
 
 
