@@ -15,20 +15,25 @@ Plane::Plane() {
     created++;
 }
 void Plane::PrintArrivalTime() {
-    cout << "The arrival time of the plane is ";
-    int x = arrivalTime2;
-    while (x > 1440) x -= 1440;
-    string s = to_string(x / 60);
-    while (s.size() < 2) s = "0" + s;
-    string t = to_string(x % 60);
-    while (t.size() < 2) t = "0" + t;
-    cout << s + ":" + t << '\n';
+    
+    if (arrivalTime / 60 < 10) {
+        cout << "0";
+    }
+    cout << arrivalTime / 60 << ":";
+    if (arrivalTime % 60 < 10) {
+        cout << "0";
+    }
+    cout << arrivalTime % 60 << endl;
 }
 
 
 void Plane::setlanded(bool x)
 {
     v_landed = x;
+}
+
+void Plane::setArrivalTime(int i)
+{
 }
 
 int Plane::getArrivalTime2()
@@ -50,7 +55,7 @@ void Plane::setArrivalTime() {
     y = rand() % (60 - 0) + 0;
     arrivalTime = x * 60 + y;
     arrivalTime2 = arrivalTime;
-    
+
     baseTime = arrivalTime;
 }
 
@@ -58,7 +63,7 @@ void Plane::ArrivalTimeAdded() {
     int x, y;
     x = rand() % (6 - 0) + 0;
     y = rand() % (60 - 0) + 0;
-    int total = x * 60 + y+baseTime;
+    int total = x * 60 + y + baseTime;
     arrivalTime2 = total;
     if (total > 1440) {
         total = total - 1440;
@@ -74,26 +79,19 @@ int Plane::getBaseTime()
 
 int Plane::getWaitTime()
 {
-    return waittime;
+    return rand() % (30 - 5) + 5;
 }
 
 int Plane::getServiceTime()
 {
-    return servicetime;
+    return rand() % (30 - 10) + 10;
 }
 
 
 
-void Plane::setWaitTime()
-{
-    waittime = rand() % (30 - 5) + 5;
 
-}
 
-void Plane::setServiceTime()
-{
-   servicetime = rand() % (30 - 10) + 10;
-}
+
 
 void Plane::setLandingTime(int x)
 {
@@ -104,12 +102,12 @@ bool Plane::landed()
 {
     return v_landed;
 }
-void Plane :: setArrivalTime2(int x)
+void Plane::setArrivalTime2(int x)
 {
     arrivalTime2 = x;
 }
 
-void Plane :: setArrivetime(int y)
+void Plane::setArrivetime(int y)
 {
     arrivalTime = y;
 }

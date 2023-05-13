@@ -8,7 +8,7 @@ template <class T>
 struct Node
 {
     Plane value;
-    
+
     Node<T>* back;
     Node<T>* next;
 };
@@ -55,6 +55,9 @@ public:
             last = temp;
         }
         counter++;
+    }
+    int getcounter() {
+        return counter;
     }
     void insertFront(T n)
     {
@@ -222,37 +225,29 @@ public:
     {
 
         Node<T>* u = first;
-       
+
         u = first;
         int bef = u->value.getArrivalTime2();
         if (u)
             u = u->next;
         while (u) {
-            if (u->value.getArrivalTime2() - bef <= 10) u->value.setArrivalTime2(bef + 11);
+            if (u->value.getArrivalTime2() - bef <= 10) u->value.setArrivalTime2(bef + rand() % (20 - 10) + 10);
             bef = u->value.getArrivalTime2();
             u = u->next;
         }
         Node<T>* temp;
         temp = first;
-        cout << "THE QUEUE IS AS FOLLOWS:" << endl;
-        while (temp != NULL)
-        {
-            if (temp->value.getArrivalTime2() > 1440)
-            {
-                temp->value.setArrivetime(temp->value.getArrivalTime2() - 1440);
-            }
-            temp = temp->next;
-        }
         
 
-       
+
+
     }
 
 
 
 
 
-     
+
     ~Queue() {} //destructor
 };
 

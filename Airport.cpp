@@ -1,6 +1,8 @@
 #include "Airport.h"
 
 int Airport::totalWaitTime = 0;
+int Airport::time = 0;
+int Airport::basetime = 0;
 
 Airport::Airport()
 {
@@ -13,34 +15,49 @@ Airport::Airport()
 
 void Airport::exitAirQueue()
 {
-	while (!AirQueue.isFull(AirQueueLimit))
-	{
-		do
-		{
-			time++;
+    
+    
+    if (!LandingQueue.isFull(LandingQueueLimit)) {
+        LandingQueue.insertFront(AirQueue.viewFront());
+        cout << "Plane # " << numPlanesLanded + 1 << " Landed at: ";
+        AirQueue.viewFront().PrintArrivalTime();
+        AirQueue.removeFront();
 
-		} while (time != AirQueue.viewFront().getArrivalTime());
-		LandingQueue.insertFront(AirQueue.viewFront());
-		AirQueue.removeFront();
-	}
+
+        numPlanesLanded++;
+    }
 }
 
 void Airport::service()
 {
-	LandingQueue.viewFront().setServiceTime();
-	 LandingQueue.viewFront().setWaitTime();
-	 totalWaitTime+= LandingQueue.viewFront().getWaitTime();
+    
+    int wait = LandingQueue.viewFront().getWaitTime();
+    int service = LandingQueue.viewFront().getServiceTime();
+    
+    cout << "Service #" << numPlanesLanded << " started at : ";
+    if ((LandingQueue.viewFront().getArrivalTime() + wait) / 60 < 10) {
+        cout << "0";
+    }
+    cout << (LandingQueue.viewFront().getArrivalTime() + wait) / 60 << ":";
+    if ((LandingQueue.viewFront().getArrivalTime() + wait) % 60 < 10) {
+        cout << "0";
+    }
+    cout << (LandingQueue.viewFront().getArrivalTime() + wait) % 60;
+    
+    cout << "   Wait Time = " << wait << endl;
+    totalWaitTime += wait;
+    
 
+    if (time == LandingQueue.viewFront().getArrivalTime() + service + wait)
+    {
+        cout << "Service #" << numPlanesLanded + 1<< " Ended at : " << ( + wait + LandingQueue.viewFront().getArrivalTime()) / 60 << " : " << (service + wait + LandingQueue.viewFront().getArrivalTime()) % 60;
+        cout << endl;
+        LandingQueue.removeFront();
+
+    }
 
 }
 
-void Airport::exitLandingQueue()
-{
-	if (time == LandingQueue.viewFront().getArrivalTime() + LandingQueue.viewFront().getServiceTime() + LandingQueue.viewFront().getWaitTime())
-	{
-		LandingQueue.removeFront();
-	}
-}
 
 
 
@@ -66,6 +83,11 @@ void Airport::PopulateAirQueue()
 	{
 		AirQueue.insertRear(planes[i]);
 	}
+    AirQueue.sort();
+    AirQueue.dealWithClashes();
+    time = AirQueue.viewFront().getBaseTime();
+    basetime = AirQueue.viewFront().getBaseTime();
+    
 }
 
 Queue<Plane> Airport::getAirQueue()
@@ -74,15 +96,35 @@ Queue<Plane> Airport::getAirQueue()
 }
 
 void Airport::clock() {
-	 time = AirQueue.viewFront().getBaseTime();
-	exitAirQueue();
-	numPlanesLanded++;
-
-	
+    if (time <= basetime + 360) {
+        if (time == AirQueue.viewFront().getArrivalTime()) {
+            
+            exitAirQueue();
+        }
+        time++;
+    }
+    
 }
 
-void Airport::printLog()
+void Airport::runsim()
 {
+    PopulateAirQueue();
 
+
+    for (int i = basetime; i < basetime + 360; i++) {
+
+        if (i == AirQueue.viewFront().getArrivalTime()) {
+            clock();
+            service();
+        }
+    }
+    
+        
+    
+
+    cout << "Average wait Time is " << averageWait() << endl;
 }
+
+        
+
 

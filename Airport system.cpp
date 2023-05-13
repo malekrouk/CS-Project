@@ -19,23 +19,11 @@ void randomize_seed()
 int main()
 {
     randomize_seed();
-    // Create a queue of planes
+    
     Airport x;
-    x.PopulateAirQueue();
     
-    
-    
-    // Add planes to the queue
-    
-    x.getAirQueue().sort();
-    // Sort the queue by arrival time
-   
-    x.getAirQueue().dealWithClashes();
 
-    x.getAirQueue().sort();
-
-    // Print the sorted queue
-    x.getAirQueue().print();
+    x.runsim();
 
     return 0;
 }

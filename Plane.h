@@ -22,27 +22,27 @@ public:
         return this->arrivalTime > other.arrivalTime;
     }
     Plane();
-    
 
-    
+
+
     void PrintArrivalTime();
     int getArrivalTime();
     int getArrivalTime2();
     int getLandingTime();
     void setLandingTime(int t);
     void setArrivalTime();
+    void setArrivalTime(int i);
     void setlanded(bool);
     bool landed();
     void ArrivalTimeAdded();
     int getBaseTime();
     int getWaitTime();
     int getServiceTime();
-    void setServiceTime();
-    void setWaitTime();
+    
     void setArrivalTime2(int x);
     void setArrivetime(int y);
 
-   
+
 
 };
 

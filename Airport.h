@@ -11,16 +11,16 @@ private:
     int numPlanesLanded =0;
     static int totalWaitTime;
     float interArrivalTime;
-    int AirQueueLimit = rand() % (30 - 10) + 10;
+    int AirQueueLimit = rand() % (15 - 10) + 10;
     int LandingQueueLimit = 1;
-    int time;
+    static int time;
+    static int basetime;
 
 
 
 
 public:
     Airport();
-    void printLog();
     float averageWait();
     void exitAirQueue();
     void exitLandingQueue();
@@ -29,5 +29,6 @@ public:
     void PopulateAirQueue();
     Queue<Plane> getAirQueue();
     void clock();
+    void runsim();
 };
 #endif
