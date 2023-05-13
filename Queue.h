@@ -222,12 +222,7 @@ public:
     {
 
         Node<T>* u = first;
-        while (u) {
-            cout << u->value.getArrivalTime2() << ' ';
-            u = u->next;
-        }
-        cout << '\n';
-
+       
         u = first;
         int bef = u->value.getArrivalTime2();
         if (u)
@@ -237,13 +232,20 @@ public:
             bef = u->value.getArrivalTime2();
             u = u->next;
         }
-
-        u = first;
-        while (u) {
-            cout << u->value.getArrivalTime2() << ' ';
-            u = u->next;
+        Node<T>* temp;
+        temp = first;
+        cout << "THE QUEUE IS AS FOLLOWS:" << endl;
+        while (temp != NULL)
+        {
+            if (temp->value.getArrivalTime2() > 1440)
+            {
+                temp->value.setArrivetime(temp->value.getArrivalTime2() - 1440);
+            }
+            temp = temp->next;
         }
-        cout << '\n';
+        
+
+       
     }
 
 
