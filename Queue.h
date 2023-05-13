@@ -226,17 +226,22 @@ public:
 
         Node<T>* u = first;
 
-        u = first;
         int bef = u->value.getArrivalTime2();
+        int bef2 = u->value.getArrivalTime();
+        int val = rand() % (40 - 20) + 20;
         if (u)
             u = u->next;
         while (u) {
-            if (u->value.getArrivalTime2() - bef <= 10) u->value.setArrivalTime2(bef + rand() % (20 - 10) + 10);
+            if (u->value.getArrivalTime2() - bef <= 10)
+            {
+                u->value.setArrivalTime2(bef + val);
+                u->value.setArrivalTime(bef2 + val);
+            }
             bef = u->value.getArrivalTime2();
+            bef2 = u->value.getArrivalTime();
             u = u->next;
         }
-        Node<T>* temp;
-        temp = first;
+        
         
 
 

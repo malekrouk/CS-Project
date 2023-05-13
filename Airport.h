@@ -5,16 +5,14 @@ using namespace std;
 #ifndef Airport_h
 #define Airport_h
 class Airport {
-private:
+public:
     Queue<Plane> AirQueue;
-    Queue<Plane> LandingQueue;
     int numPlanesLanded =0;
-    static int totalWaitTime;
+     int totalWaitTime =0;
     float interArrivalTime;
     int AirQueueLimit = rand() % (15 - 10) + 10;
-    int LandingQueueLimit = 1;
-    static int time;
-    static int basetime;
+     int time=0;
+     int basetime=0;
 
 
 
@@ -23,7 +21,6 @@ public:
     Airport();
     float averageWait();
     void exitAirQueue();
-    void exitLandingQueue();
     void service();
     int getAirQueueLimit();
     void PopulateAirQueue();

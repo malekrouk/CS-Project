@@ -1,62 +1,63 @@
 #include "Airport.h"
 
-int Airport::totalWaitTime = 0;
-int Airport::time = 0;
-int Airport::basetime = 0;
+
 
 Airport::Airport()
 {
-	
-	interArrivalTime = 6;
-	Queue<Plane> planes;
-	int QueueLimit = rand() % (30 - 10) + 10;
 
 }
 
 void Airport::exitAirQueue()
 {
     
-    
-    if (!LandingQueue.isFull(LandingQueueLimit)) {
-        LandingQueue.insertFront(AirQueue.viewFront());
+    if(time==AirQueue.viewFront().getArrivalTime())
+    {
         cout << "Plane # " << numPlanesLanded + 1 << " Landed at: ";
         AirQueue.viewFront().PrintArrivalTime();
-        AirQueue.removeFront();
-
-
         numPlanesLanded++;
     }
-}
+    }
+
 
 void Airport::service()
 {
-    
-    int wait = LandingQueue.viewFront().getWaitTime();
-    int service = LandingQueue.viewFront().getServiceTime();
-    
-    cout << "Service #" << numPlanesLanded << " started at : ";
-    if ((LandingQueue.viewFront().getArrivalTime() + wait) / 60 < 10) {
-        cout << "0";
-    }
-    cout << (LandingQueue.viewFront().getArrivalTime() + wait) / 60 << ":";
-    if ((LandingQueue.viewFront().getArrivalTime() + wait) % 60 < 10) {
-        cout << "0";
-    }
-    cout << (LandingQueue.viewFront().getArrivalTime() + wait) % 60;
-    
-    cout << "   Wait Time = " << wait << endl;
-    totalWaitTime += wait;
-    
-
-    if (time == LandingQueue.viewFront().getArrivalTime() + service + wait)
+    int w;
+    while (time < basetime + 360 && !AirQueue.isEmpty())
     {
-        cout << "Service #" << numPlanesLanded + 1<< " Ended at : " << ( + wait + LandingQueue.viewFront().getArrivalTime()) / 60 << " : " << (service + wait + LandingQueue.viewFront().getArrivalTime()) % 60;
-        cout << endl;
-        LandingQueue.removeFront();
+        
+            if (time == AirQueue.viewFront().getArrivalTime2())
+            {
+                cout << "Plane #" << numPlanesLanded + 1 << " Landed at -> ";
+                if (AirQueue.viewFront().getArrivalTime() / 60 < 10)
+                    cout << "0"; 
+                cout<< AirQueue.viewFront().getArrivalTime() / 60 <<":";
+                if (AirQueue.viewFront().getArrivalTime() % 60 < 10)
+                    cout << "0"; 
+                cout<< AirQueue.viewFront().getArrivalTime() % 60 << endl;
+                w = AirQueue.viewFront().getWaitTime();
+                numPlanesLanded++;
+               do
+                   time++;
+               while (time == AirQueue.viewFront().getArrivalTime2() + w);
+                   cout << "Plane #" << numPlanesLanded << " Service Started at: -> ";
+                       if ((AirQueue.viewFront().getArrivalTime() +w) / 60 < 10)
+                           cout << "0";
+                   cout << (AirQueue.viewFront().getArrivalTime() +w )/ 60 << ":";
+                   if ((AirQueue.viewFront().getArrivalTime() +w) % 60 < 10)
+                       cout << "0";
+                   cout << (AirQueue.viewFront().getArrivalTime() + w) % 60;
+               cout << "     Wait Time = " << w << endl;
+               totalWaitTime += w;
+               AirQueue.removeFront();
+            }
+        
+
+            time++;
+            
+    }
 
     }
 
-}
 
 
 
@@ -65,7 +66,7 @@ float Airport::averageWait()
 {
 	if (numPlanesLanded == 0)
 		return 0;
-	return float(totalWaitTime / numPlanesLanded);
+	return float(totalWaitTime) / float(numPlanesLanded);
 }
 
 
@@ -96,34 +97,26 @@ Queue<Plane> Airport::getAirQueue()
 }
 
 void Airport::clock() {
-    if (time <= basetime + 360) {
-        if (time == AirQueue.viewFront().getArrivalTime()) {
-            
-            exitAirQueue();
-        }
+    
         time++;
     }
     
-}
+
 
 void Airport::runsim()
 {
     PopulateAirQueue();
 
 
-    for (int i = basetime; i < basetime + 360; i++) {
+    service();
+    cout << "Average wait Time is " << averageWait() << endl;
 
-        if (i == AirQueue.viewFront().getArrivalTime()) {
-            clock();
-            service();
-        }
     }
     
         
     
 
-    cout << "Average wait Time is " << averageWait() << endl;
-}
+
 
         
 

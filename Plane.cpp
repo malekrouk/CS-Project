@@ -34,6 +34,7 @@ void Plane::setlanded(bool x)
 
 void Plane::setArrivalTime(int i)
 {
+    arrivalTime = i;
 }
 
 int Plane::getArrivalTime2()
