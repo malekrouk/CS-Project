@@ -10,8 +10,7 @@ Plane::Plane() {
     else {
         ArrivalTimeAdded();
     }
-    v_landed = false;
-    landingTime = -1;
+   
     created++;
 }
 void Plane::PrintArrivalTime() {
@@ -27,10 +26,6 @@ void Plane::PrintArrivalTime() {
 }
 
 
-void Plane::setlanded(bool x)
-{
-    v_landed = x;
-}
 
 void Plane::setArrivalTime(int i)
 {
@@ -46,9 +41,7 @@ int Plane::getArrivalTime() {
     return arrivalTime;
 }
 
-int Plane::getLandingTime() {
-    return landingTime;
-}
+
 
 void Plane::setArrivalTime() {
     int x, y;
@@ -90,19 +83,6 @@ int Plane::getServiceTime()
 
 
 
-
-
-
-
-void Plane::setLandingTime(int x)
-{
-    landingTime = x;
-}
-
-bool Plane::landed()
-{
-    return v_landed;
-}
 void Plane::setArrivalTime2(int x)
 {
     arrivalTime2 = x;

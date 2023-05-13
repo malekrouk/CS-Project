@@ -3,20 +3,9 @@
 
 
 Airport::Airport()
-{
+{}
 
-}
 
-void Airport::exitAirQueue()
-{
-    
-    if(time==AirQueue.viewFront().getArrivalTime())
-    {
-        cout << "Plane # " << numPlanesLanded + 1 << " Landed at: ";
-        AirQueue.viewFront().PrintArrivalTime();
-        numPlanesLanded++;
-    }
-    }
 
 
 void Airport::service()
@@ -38,7 +27,7 @@ void Airport::service()
                 numPlanesLanded++;
                do
                    time++;
-               while (time == AirQueue.viewFront().getArrivalTime2() + w);
+               while (time != AirQueue.viewFront().getArrivalTime2() + w);
                    cout << "Plane #" << numPlanesLanded << " Service Started at: -> ";
                        if ((AirQueue.viewFront().getArrivalTime() +w) / 60 < 10)
                            cout << "0";

@@ -22,11 +22,6 @@ int main()
     
     Airport x;
 
-    x.PopulateAirQueue();
-    x.getAirQueue().print();
-    cout << "--------------------------" << endl;
-    x.getAirQueue().dealWithClashes();
-    x.getAirQueue().print();
 
     x.runsim();
 

@@ -20,7 +20,6 @@ public:
 public:
     Airport();
     float averageWait();
-    void exitAirQueue();
     void service();
     int getAirQueueLimit();
     void PopulateAirQueue();

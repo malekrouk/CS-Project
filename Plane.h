@@ -8,8 +8,6 @@ using namespace std;
 class Plane {
 private:
     int arrivalTime;
-    int landingTime;
-    bool v_landed;
     int waittime;
     int servicetime;
     static int created;
@@ -28,17 +26,11 @@ public:
     void PrintArrivalTime();
     int getArrivalTime();
     int getArrivalTime2();
-    int getLandingTime();
-    void setLandingTime(int t);
     void setArrivalTime();
     void setArrivalTime(int i);
-    void setlanded(bool);
-    bool landed();
     void ArrivalTimeAdded();
     int getBaseTime();
-    int getWaitTime();
-    int getServiceTime();
-    
+    int getWaitTime();    
     void setArrivalTime2(int x);
     void setArrivetime(int y);
 
