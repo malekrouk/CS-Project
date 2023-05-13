@@ -32,7 +32,6 @@ public:
     int getBaseTime();
     int getWaitTime();    
     void setArrivalTime2(int x);
-    void setArrivetime(int y);
 
 
 
