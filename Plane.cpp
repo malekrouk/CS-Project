@@ -76,11 +76,6 @@ int Plane::getWaitTime()
     return rand() % (30 - 5) + 5;
 }
 
-int Plane::getServiceTime()
-{
-    return rand() % (30 - 10) + 10;
-}
-
 
 
 void Plane::setArrivalTime2(int x)
