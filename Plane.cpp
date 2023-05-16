@@ -83,7 +83,3 @@ void Plane::setArrivalTime2(int x)
     arrivalTime2 = x;
 }
 
-void Plane::setArrivetime(int y)
-{
-    arrivalTime = y;
-}

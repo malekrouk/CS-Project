@@ -117,7 +117,7 @@ public:
 
     void removeFront()
     {
-        if (last == NULL) // Queue is empty
+        if (first == NULL) // Queue is empty
         {
             cout << "List is empty." << endl;
             return;
@@ -132,11 +132,14 @@ public:
             return;
         }
 
-        Node<T>* temp = first->next; // Second node
-        delete first;
-        temp->back = NULL;
-        first = temp;
-        counter--;
+        else
+        {
+            Node<T>* temp = first->next; // Second node
+            delete first;
+            temp->back = NULL;
+            first = temp;
+            counter--;
+        }
     }
     T viewFront()
     {
@@ -235,7 +238,12 @@ public:
             if (u->value.getArrivalTime2() - bef <= 10)
             {
                 u->value.setArrivalTime2(bef + val);
-                u->value.setArrivalTime(bef2 + val);
+                if((bef2+val) > 1440)
+                u->value.setArrivalTime(bef2 + val -1440);
+                else
+                    u->value.setArrivalTime(bef2 + val);
+
+                
             }
             bef = u->value.getArrivalTime2();
             bef2 = u->value.getArrivalTime();

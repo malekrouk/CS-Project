@@ -21,8 +21,9 @@ int main()
     randomize_seed();
     
     Airport x;
-
-
+   
+  
+   
     x.runsim();
 
 
